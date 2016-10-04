@@ -9,8 +9,7 @@ const ROOT = CLIENT + '/..';
 // Identical to development webpack config, except minified.
 module.exports = {
   entry: {
-    app: __dirname + '/entry',
-    style: __dirname + '/style'
+    app: __dirname + '/entry'
   },
   devtool: 'source-map',
   output: {
@@ -23,11 +22,11 @@ module.exports = {
         test: /\.js$/,
         loader: 'babel'
       }, {
-        test: /\.scss$/,
-        loader: ExtractTextPlugin.extract('style', 'css!sass?sourceMap=true')
-      }, {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract('style', 'css?sourceMap=true')
+        loader: 'style-loader!css-loader?modules'
+      }, {
+        test: /\.scss$/,
+        loader: 'style-loader!css-loader?modules!sass-loader'
       }, {
         test: /\.json$/,
         loader: 'json'
@@ -57,7 +56,7 @@ module.exports = {
         loader: 'url?limit=10000&mimetype=image/svg+xml'
       }, {
         test: /\.rt\.html$/,
-        loader: 'react-templates-loader?targetVersion=0.14.0'
+        loader: 'react-templates-loader?modules=amd'
       }
     ]
   },
@@ -90,4 +89,3 @@ module.exports = {
     }
   }
 }
-
