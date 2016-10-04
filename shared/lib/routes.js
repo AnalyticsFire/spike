@@ -2,9 +2,14 @@ import Details from './routes/details/details.route';
 import Index from './routes/index/index.route';
 import Login from './routes/login/login.route';
 import Missing from './routes/missing/missing.route';
+import Test from './routes/test/test.route';
 
 export function defineRoutes(i18n) {
   return includeHelpers([
+    new Test({
+      path: new RegExp(`^\/?((\\w{2})\/)?(${i18n.t('test')})$`),
+      parameters: {2: 'locale'}
+    }),
     new Index({
       path: new RegExp(`^\/?((\\w{2})\/?)?$`),
       parameters: {2: 'locale'}
